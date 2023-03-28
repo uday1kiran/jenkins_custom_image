@@ -1,12 +1,16 @@
-FROM jenkins/jenkins:lts
+#https://vinothkumar-p.medium.com/jenkins-docker-image-with-pre-installed-plugins-152f5fa23a98
+FROM jenkins/jenkins:alpine
+ENV JENKINS_USER admin
+ENV JENKINS_PASS admin
 
+# Skip initial setup
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+
+
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 USER root
-
-# Install custom plugins
-RUN jenkins-plugin-cli --plugins "snyk-security-scanner:2.12.1 file-operations:1.11 branch-api:2.5.6 pipeline-build-step:2.13 workflow-support:3.8 aws-credentials:1.28 subversion:2.13.1 github-branch-source:2.7.1 publish-over-ftp:1.15 cloudbees-folder:6.740.ve4f4ffa_dea_54"
-
-# Set environment variables
-# ENV <ENV_VARIABLE_1> <VALUE>
-# ENV <ENV_VARIABLE_2> <VALUE>
+RUN apk add docker
+RUN apk add py-pip
 
 USER jenkins
