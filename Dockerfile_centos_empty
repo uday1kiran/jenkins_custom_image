@@ -1,7 +1,11 @@
 FROM centos
 
 # Install any necessary packages
-RUN yum update -y --disablerepo=appstream --disablerepo=baseos && yum install -y --nobest nano vim
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+RUN yum update -y && yum install -y nano vim
 
 COPY amazon-corretto-15.0.2.7.1-linux-x64 /usr/src/app/amazon-coretto-jdk
 ENV JAVA_HOME=/usr/src/app/amazon-coretto-jdk
