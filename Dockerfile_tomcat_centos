@@ -1,0 +1,35 @@
+###############################
+#Docker command to build image
+#
+#uday@jenkins-server:~/Desktop/Docker-samples$ docker build -t tomcatserver .
+################################
+#Dependencies links
+#
+#https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/
+#https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+#
+################################
+#Extra configuration manually to be done
+#
+#manager app access: 
+#https://www.ibm.com/support/knowledgecenter/en/SS6RHZ_2.1.0/com.ibm.rational.pe.install.doc/topics/t_web_services_tomcat.html
+#https://www.digitalocean.com/community/questions/how-to-access-tomcat-8-admin-gui-from-different-host
+
+#Restart tomcat: https://docs.bmc.com/docs/display/public/proactivenet95/Restarting+Apache+Tomcat
+#ssh to container running:http://phase2.github.io/devtools/common-tasks/ssh-into-a-container/
+#################################
+
+FROM centos
+EXPOSE 80
+EXPOSE 443
+EXPOSE 8080
+RUN mkdir -p /usr/src/app
+COPY apache-tomcat-8.5.35 /usr/src/app/apache-tomcat-8.5.35
+COPY jdk8u212-b04 /usr/src/app/jdk8u212-b04
+ENV JAVA_HOME=/usr/src/app/jdk8u212-b04
+ENV CATALINA_HOME=/usr/src/app/apache-tomcat-8.5.35
+ENV DOCKER_AUTHOR="Uday Kiran Reddy"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+USER root
+CMD ["/usr/src/app/apache-tomcat-8.5.35/bin/catalina.sh","run"]
