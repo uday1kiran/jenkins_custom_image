@@ -1,13 +1,14 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Docker Image Build
+name: Docker Tomcat Image Build
 
 on:
   push:
     branches:
       - 'ukreddy*'
       - 'main'
+      - 'co*'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
       
