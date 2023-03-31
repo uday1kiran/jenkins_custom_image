@@ -1,0 +1,7 @@
+FROM centos
+
+# Install any necessary packages
+RUN yum update -y && yum install -y nano vim
+
+# Add a command that runs continuously
+CMD tail -f /dev/null
