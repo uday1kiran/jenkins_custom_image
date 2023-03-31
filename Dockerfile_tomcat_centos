@@ -25,7 +25,7 @@ EXPOSE 443
 EXPOSE 8080
 RUN mkdir -p /usr/src/app
 COPY apache-tomcat-8.5.35 /usr/src/app/apache-tomcat-8.5.35
-COPY jdk8u212-b04 /usr/src/app/jdk8u212-b04
+COPY amazon-corretto-15.0.2.7.1-linux-x64 /usr/src/app/jdk8u212-b04
 ENV JAVA_HOME=/usr/src/app/jdk8u212-b04
 ENV CATALINA_HOME=/usr/src/app/apache-tomcat-8.5.35
 ENV DOCKER_AUTHOR="Uday Kiran Reddy"
