@@ -51,10 +51,22 @@ jobs:
         run: |
           curl -o apache-tomcat-8.5.35.tar.gz https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
           curl -o OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
-      - name: Extract Dependencies
-        run: |
-          tar -xvzf apache-tomcat-8.5.35.tar.gz
-          tar -xvzf OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+      - name: Extract tomcat
+        uses: a7ul/tar-action@v1.1.0
+        id: extract0
+        with:
+          command: x
+          files: apache-tomcat-8.5.35.tar.gz
+      - name: Extract JDK
+        uses: a7ul/tar-action@v1.1.0
+        id: extract1
+        with:
+          command: x
+          files: OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+#      - name: Extract Dependencies
+#        run: |
+#          tar -xvzf apache-tomcat-8.5.35.tar.gz
+#          tar -xvzf OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
       - name: Build and push Tomcat image
         run: |
           docker build . -t uday1kiran/tomcatserver-centos:${BRANCH_NAME}-${SHORT_SHA} -f Dockerfile_tomcat_centos
