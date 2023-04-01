@@ -1,4 +1,4 @@
-name: Docker CentOS Image Build
+name: Docker CLI Image Build
 
 on:
   push:
