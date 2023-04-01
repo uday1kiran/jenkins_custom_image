@@ -51,7 +51,7 @@ jobs:
         with:
           command: x
           files: OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
-      - name: Build and push CentOS image
+      - name: Build and push dockercli image
         run: |
-          docker build . -t uday1kiran/dockercli:${BRANCH_NAME}-${SHORT_SHA} -f Dockerfile_docker_customimageml
+          DOCKER_BUILDKIT=1 docker build . -t uday1kiran/dockercli:${BRANCH_NAME}-${SHORT_SHA} -f Dockerfile_docker_customimageml
           docker push uday1kiran/dockercli:${BRANCH_NAME}-${SHORT_SHA}
