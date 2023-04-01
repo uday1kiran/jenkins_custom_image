@@ -15,7 +15,7 @@ RUN  yum update -y && \
      docker-ce-cli \
      containerd.io \
      docker-buildx-plugin \
-     docker-compose-plugin \
+     docker-compose-plugin && \
      yum clean all && \
      rm -rf /var/cache/yum
      
