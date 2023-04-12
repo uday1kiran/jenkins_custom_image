@@ -10,7 +10,7 @@ RUN  yum update -y && \
      yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
      yum update -y && \
      yum install -y \
-     vim nano python3 zip unzip git \
+     vim nano python3 zip unzip \
      docker-ce \
      docker-ce-cli \
      containerd.io \
@@ -30,8 +30,6 @@ RUN mkdir -p /usr/src/app && cp -rf amazon-corretto-15.0.2.7.1-linux-x64 /usr/sr
 # COPY amazon-corretto-15.0.2.7.1-linux-x64 /usr/src/app/amazon-coretto-jdk
 ENV JAVA_HOME=/usr/src/app/amazon-coretto-jdk
 ENV PATH="${JAVA_HOME}/bin:/usr/bin:${PATH}"
-
-RUN "whereis git && echo $PATH"
 
 # Add a command that runs continuously
 CMD tail -f /dev/null
